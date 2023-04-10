@@ -5,6 +5,7 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
+archivesBaseName = "NonConflictKeys+Fabric+1.18.X-1.19.X"
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
