@@ -19,7 +19,7 @@ group = 'committee.nova'
 version = '1.0.0'
 
 java {
-    archivesBaseName = 'nckey'
+    archivesBaseName = 'NonConflictKeys-Forge-1.19.X'
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
