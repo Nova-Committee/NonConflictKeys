@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "committee.nova.nckey.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "MixinKeyBinding",
+    "MixinKeyBindingMap"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "nckey.mixin-refmap.json",
+  "minVersion": "0.8"
+}
