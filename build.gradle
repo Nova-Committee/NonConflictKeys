@@ -16,7 +16,7 @@ plugins {
 
 apply plugin: 'org.spongepowered.mixin'
 
-group = 'committee.nova.forge.nckey'
+group = 'committee.nova.nckey.forge'
 version = '1.0.0'
 
 java {
