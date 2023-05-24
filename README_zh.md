@@ -1,7 +1,7 @@
 **中文** | [English](README.md)
 
 # 介绍
-全键无冲是[现代化按键绑定](https://github.com/Nova-Committee/ModernKeyBinding) ([Modrinth](https://modrinth.com/mod/modernkeybinding) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/modern-keybinding))中同名功能的单独实现。
+全键无冲([Modrinth](https://modrinth.com/mod/nonconflictkeys) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/nonconflictkeys))是[现代化按键绑定](https://github.com/Nova-Committee/ModernKeyBinding)([Modrinth](https://modrinth.com/mod/modernkeybinding) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/modern-keybinding))中同名功能的单独实现。
 
 # 功能
 按下按键时，所有指定键位为该按键的按键绑定均能被激活。
@@ -40,3 +40,9 @@ dependencies {
 
 # 注意事项
 你**可以**将本模组加入整合包。
+
+# 发布平台
+## CurseForge
+[![CurseForge](https://cf.way2muchnoise.eu/864845.svg)](https://www.curseforge.com/minecraft/mc-mods/nonconflictkeys)
+## Modrinth
+[![Modrinth](https://img.shields.io/modrinth/dt/XU9gCifV?style=flat-square)](https://modrinth.com/mod/nonconflictkeys)
