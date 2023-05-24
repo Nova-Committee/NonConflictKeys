@@ -1,3 +1,5 @@
+**English** | [中文](README_zh.md)
+
 # Introduction
 NonConflictKeys is an independent implementation of the same name feature in [Modern KeyBinding](https://github.com/Nova-Committee/ModernKeyBinding) ([Modrinth](https://modrinth.com/mod/modernkeybinding) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/modern-keybinding)).
 
