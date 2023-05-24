@@ -40,3 +40,9 @@ NonConflictKeys is under [GNU-AGPL-3.0-only](https://www.gnu.org/licenses/agpl-3
 
 # ATTENTION
 You **DEFINITELY CAN** add the mod to your modpack.
+
+# Publishing Platforms
+## CurseForge
+[![CurseForge](https://cf.way2muchnoise.eu/864845.svg)](https://www.curseforge.com/minecraft/mc-mods/nonconflictkeys)
+## Modrinth
+[![Modrinth](https://img.shields.io/modrinth/dt/XU9gCifV?style=flat-square)](https://modrinth.com/mod/nonconflictkeys)
