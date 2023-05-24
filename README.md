@@ -26,7 +26,7 @@ dependencies {
 ## Fabric
 ```groovy
 dependencies {
-  modImplementation("committee.nova.nckey.forge:nckey-${mc_version}:${mod_version}") {
+  modImplementation("committee.nova.nckey.fabric:nckey-${mc_version}:${mod_version}") {
     transitive = false
   }
 }
