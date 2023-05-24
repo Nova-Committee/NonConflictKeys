@@ -35,8 +35,8 @@ dependencies {
 NonConflictKeys is under [GNU-AGPL-3.0-only](https://www.gnu.org/licenses/agpl-3.0.html).
 
 # Extra Notes
-- We don't want the mod to be "merged into" | "replaced by" | "Any foo of the same meaning" any modpack-behavior mod (like Universal Tweaks or Debugify). See [this](https://gist.github.com/fxmorin/9770473614e3e5e0703e44273dab33f7).
-- We don't want any modpack using our mod to charge players in any way.
+- We don't want the mod to be "merged into" | "replaced by" | "Any foo of the same meaning" any modpack-behavior mod (like Un\*\*\*\*\*al Tw\*\*ks or Deb\*\*\*\*y). See [this](https://gist.github.com/fxmorin/9770473614e3e5e0703e44273dab33f7).
+- We don't want any modpack using our mod to **charge players in any way**.
 
 # ATTENTION
 You **DEFINITELY CAN** add the mod to your modpack.
