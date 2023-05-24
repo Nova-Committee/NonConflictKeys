@@ -32,11 +32,11 @@ dependencies {
 }
 ```
 # 许可证
-全键无冲遵循[GNU-AGPL-3.0-only](https://www.gnu.org/licenses/agpl-3.0.html).
+全键无冲遵循 [GNU-AGPL-3.0-only](https://www.gnu.org/licenses/agpl-3.0.html)。
 
 # 附加说明
-- 我们不希望本模组被"合并到" | "由……替换" | "任何类似的说法"任何“整合包行为”的模组（如 Universal Tweaks 或 Debugify）。请见[本帖](https://gist.github.com/fxmorin/9770473614e3e5e0703e44273dab33f7)。
-- 我们不希望使用本模组的整合包以任何形式向玩家收费。
+- 我们不希望本模组被"合并到" | "由……替换" | "任何类似的说法"任何“整合包行为”的模组（如 Un\*\*\*\*\*al Tw\*\*ks 或 Deb\*\*\*\*y）。请见[本帖](https://gist.github.com/fxmorin/9770473614e3e5e0703e44273dab33f7)。
+- 我们不希望使用本模组的整合包**以任何形式向玩家收费**。
 
 # 注意事项
 你**可以**将本模组加入整合包。
