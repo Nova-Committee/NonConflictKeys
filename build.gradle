@@ -1,0 +1,62 @@
+plugins { id 'dev.desiderium.retro.loom' }
+group = providers.gradleProperty('mod_group').get()
+
+def modId = providers.gradleProperty('mod_id').get()
+def modName = providers.gradleProperty('mod_name').get()
+def mixinConfigName = "${modId}.mixins.json"
+def mixinRefmapName = "${modId}.mixins.refmap.json"
+base.archivesName = "${modId}-retrospectum-1.6.4"
+
+def prepareModSources = tasks.register('prepareModSources', Sync) {
+    def tokens = [MOD_ID: modId, MOD_NAME: modName, MOD_VERSION: project.version.toString()]
+        .collectEntries { key, value ->
+            def literal = groovy.json.JsonOutput.toJson(value)
+            [(key): literal.substring(1, literal.length() - 1)]
+        }
+    inputs.properties(tokens)
+    from('src/main/java') {
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: tokens)
+    }
+    filteringCharset = 'UTF-8'
+    into(layout.buildDirectory.dir('prepared-sources/main/java'))
+}
+tasks.named('compileJava', JavaCompile) {
+    setSource(files(prepareModSources).asFileTree)
+}
+
+tasks.named('processResources', ProcessResources) {
+    def modInfo = [
+        mod_id: modId,
+        mod_name: modName,
+        mod_version: project.version.toString(),
+        mod_description: providers.gradleProperty('mod_description').getOrElse(''),
+        mod_authors: providers.gradleProperty('mod_authors').getOrElse('').split(',').collect { it.trim() }.findAll { it },
+        mod_url: providers.gradleProperty('mod_url').getOrElse(''),
+        mod_credits: providers.gradleProperty('mod_credits').getOrElse('')
+    ].collectEntries { key, value -> [(key): groovy.json.JsonOutput.toJson(value)] }
+    inputs.property('modInfo', modInfo)
+    inputs.properties(mod_id: modId, mixin_refmap: mixinRefmapName)
+    filesMatching('mcmod.info') { expand(modInfo) }
+    filesMatching('mod.mixins.json') {
+        expand(mixin_refmap: mixinRefmapName)
+        name = mixinConfigName
+    }
+}
+
+def mixinCheckout = providers.gradleProperty('retrospectumMixinCheckout').orNull
+def bootstrapJar = mixinCheckout
+    ? file("${mixinCheckout}/runtime/mixin-bootstrap/build/libs/retrospectum-mixin-0.1.0-SNAPSHOT.jar")
+    : file(providers.gradleProperty('mixin_bootstrap').getOrElse('libs/retrospectum-mixin-0.1.0-alpha.1.jar'))
+
+repositories {
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+dependencies {
+    minecraft 'com.mojang:minecraft:1.6.4'
+    forge 'net.minecraftforge:forge:1.6.4-9.11.1.1345:universal'
+    mappings 'net.minecraftforge:forge:1.6.4-9.11.1.1345:src@zip'
+    mixinBootstrap files(bootstrapJar)
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+}
+retrospectum.mixin('main', mixinRefmapName)
+retrospectum.mixinConfig(mixinConfigName)

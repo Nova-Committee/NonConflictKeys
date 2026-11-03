@@ -1,0 +1,111 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.desiderium.retro",
+    "module": "retrospectum-loom",
+    "version": "0.1.0-alpha.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.6"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "retrospectum-loom-0.1.0-alpha.1.jar",
+          "url": "retrospectum-loom-0.1.0-alpha.1.jar",
+          "size": 313954,
+          "sha512": "edfd4c4e27949e322117102ada469c913c72d5ebc749e456a95c149c85a4ce749acfd97e577a319c05823585ffcd7678a81b3b9c86d30f2dfccbca610c6ed2b1",
+          "sha256": "37c2ddf59931d44f9e7f62540e8b6a686bbbf56f22bda84fb6492a42690f48dc",
+          "sha1": "6f5cea9853fce9293cb59b3120397b4deed358e0",
+          "md5": "fcb92e53ed3dcdb975a0e3ae08143de2"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.7.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.7.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-tree",
+          "version": {
+            "requires": "9.7.1"
+          }
+        },
+        {
+          "group": "net.fabricmc",
+          "module": "tiny-remapper",
+          "version": {
+            "requires": "0.11.1"
+          }
+        },
+        {
+          "group": "org.jetbrains",
+          "module": "intellij-fernflower",
+          "version": {
+            "requires": "1.2.1.16"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-compress",
+          "version": {
+            "requires": "1.25.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "retrospectum-loom-0.1.0-alpha.1.jar",
+          "url": "retrospectum-loom-0.1.0-alpha.1.jar",
+          "size": 313954,
+          "sha512": "edfd4c4e27949e322117102ada469c913c72d5ebc749e456a95c149c85a4ce749acfd97e577a319c05823585ffcd7678a81b3b9c86d30f2dfccbca610c6ed2b1",
+          "sha256": "37c2ddf59931d44f9e7f62540e8b6a686bbbf56f22bda84fb6492a42690f48dc",
+          "sha1": "6f5cea9853fce9293cb59b3120397b4deed358e0",
+          "md5": "fcb92e53ed3dcdb975a0e3ae08143de2"
+        }
+      ]
+    }
+  ]
+}

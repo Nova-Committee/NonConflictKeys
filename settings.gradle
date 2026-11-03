@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        maven { url = uri('libs/loom-maven') }
+        maven { url = 'https://maven.fabricmc.net/' }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    plugins {
+        id 'dev.desiderium.retro.loom' version providers.gradleProperty('loom_version').getOrElse('0.1.0-alpha.1')
+    }
+    def checkout = providers.gradleProperty('retrospectumLoomCheckout').orNull
+    if (checkout) includeBuild(checkout)
+}
+rootProject.name = 'NonConflictKeys1.6.4'

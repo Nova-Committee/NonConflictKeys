@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "minVersion": "0.8.7",
+  "target": "@env(DEFAULT)",
+  "package": "io.github.vulpesstella.nckeys.mixin",
+  "compatibilityLevel": "JAVA_6",
+  "refmap": "${mixin_refmap}",
+  "client": ["MixinKeyBinding"],
+  "injectors": { "defaultRequire": 1 }
+}

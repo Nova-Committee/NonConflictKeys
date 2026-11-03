@@ -1,0 +1,7 @@
+platform	major	version	url	sha256
+windows-x64	7	7.0.352	https://cdn.azul.com/zulu/bin/zulu7.56.0.11-ca-jdk7.0.352-win_x64.zip	a0255d1e29d4ab9d685b698217d9adca6a29b2e493608d4e73feda84e7759085
+windows-x64	8	8.0.512	https://cdn.azul.com/zulu/bin/zulu8.98.0.107-ca-jdk8.0.512-win_x64.zip	9284148d71bff3b34d678a5159bb5688a062f5084ef14abb3daea0a173bb0bf2
+windows-x64	17	17.0.21.0.3	https://cdn.azul.com/zulu/bin/zulu17.70.113-ca-jdk17.0.21.0.3-win_x64.zip	612efab667042036ad2e4da138cf690680e3cb99b5731c3b27ca00ffb0128230
+linux-x64	7	7.0.352	https://cdn.azul.com/zulu/bin/zulu7.56.0.11-ca-jdk7.0.352-linux_x64.tar.gz	8a7387c1ed151474301b6553c6046f865dc6c1e1890bcf106acc2780c55727c8
+linux-x64	8	8.0.512	https://cdn.azul.com/zulu/bin/zulu8.98.0.107-ca-jdk8.0.512-linux_x64.tar.gz	f82a4cb00bbac1ddaa4e578cd6221361a45ee0e4ce51969c4109451750e5164e
+linux-x64	17	17.0.21.0.3	https://cdn.azul.com/zulu/bin/zulu17.70.113-ca-jdk17.0.21.0.3-linux_x64.tar.gz	81946095839140100ebff36ff52007676e260bbe482675dbc04772595ed94390
