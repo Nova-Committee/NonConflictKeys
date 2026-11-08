@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'net.neoforged.moddev' version '2.0.148'
+    id 'maven-publish'
 }
 
 version = mod_version
