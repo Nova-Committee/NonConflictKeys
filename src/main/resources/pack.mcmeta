@@ -1,11 +1,13 @@
 {
   "pack": {
-    "description": {
-      "text": "${mod_id} resources"
-    },
-    "pack_format": ${
-  pack_format_number
+    "description": "${mod_id} resources",
+    "min_format": [
+      92,
+      0
+    ],
+    "max_format": [
+      113,
+      1
+    ]
+  }
 }
-}
-}
-
