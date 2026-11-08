@@ -93,19 +93,6 @@ foreach ($major in @(7,8,17)) {
     $homes[$major] = $selected.Replace('\','/')
     Write-Host "JDK ${major}: $selected"
 }
-$discoveryRoot = Join-Path $env:USERPROFILE '.jdks'
-New-Item -ItemType Directory -Force -Path $discoveryRoot | Out-Null
-foreach ($major in @(7,8,17)) {
-    $discoveryPrefix = [IO.Path]::GetFullPath($discoveryRoot).TrimEnd('\','/') + [IO.Path]::DirectorySeparatorChar
-    if ([IO.Path]::GetFullPath($homes[$major]).StartsWith($discoveryPrefix, [StringComparison]::OrdinalIgnoreCase)) { continue }
-    $hasher = [Security.Cryptography.SHA256]::Create()
-    try { $digest = [BitConverter]::ToString($hasher.ComputeHash($utf8.GetBytes($homes[$major]))).Replace('-','').Substring(0,16).ToLowerInvariant() }
-    finally { $hasher.Dispose() }
-    $link = Join-Path $discoveryRoot "retrospectum-$major-$digest"
-    if (!(Get-Item -LiteralPath $link -Force -ErrorAction SilentlyContinue)) {
-        New-Item -ItemType Junction -Path $link -Target $homes[$major] | Out-Null
-    }
-    if (!(Test-Jdk $link $major)) { throw "Invalid registered JDK: $link" }
-}
 [IO.File]::WriteAllText((Join-Path $jdkRoot 'homes.properties'), "jdk7=$($homes[7])`njdk8=$($homes[8])`njdk17=$($homes[17])`n", $utf8)
+[IO.File]::WriteAllText((Join-Path $root 'gradle.local.properties'), "java7Home=$($homes[7])`norg.gradle.java.installations.paths=$($homes[7]),$($homes[8]),$($homes[17])`n", $utf8)
 Write-Host 'Ready. Run ./build.ps1 build genIdeaRuns, or open the project in IntelliJ IDEA.'

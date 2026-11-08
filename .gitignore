@@ -15,9 +15,10 @@ __pycache__/
 gradle.local.properties
 
 libs/*
-!libs/README.md
-!libs/checksums.sha256
-!libs/loom-maven/
-!libs/retrospectum-mixin-0.1.0-alpha.1.jar
 
 .jdks/
+
+.vscode/
+*.launch
+
+/.development/

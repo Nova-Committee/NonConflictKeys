@@ -65,12 +65,7 @@ for major in 7 8 17; do
     homes[$major]=$jdk_home
     echo "JDK $major: $jdk_home"
 done
-mkdir -p "$HOME/.jdks"
-for major in 7 8 17; do
-    digest=$(printf '%s' "${homes[$major]}" | sha256sum)
-    link="$HOME/.jdks/retrospectum-$major-${digest:0:16}"
-    if [[ ! -e $link && ! -L $link ]]; then ln -s -- "${homes[$major]}" "$link"; fi
-    valid_jdk "$link" "$major" || { echo "Invalid registered JDK: $link" >&2; exit 1; }
-done
 printf 'jdk7=%s\njdk8=%s\njdk17=%s\n' "${homes[7]}" "${homes[8]}" "${homes[17]}" > "$root/.jdks/homes.properties"
+printf 'java7Home=%s\norg.gradle.java.installations.paths=%s,%s,%s\n' "${homes[7]}" "${homes[7]}" "${homes[8]}" "${homes[17]}" > "$root/gradle.local.properties"
+
 echo 'Ready. Run ./build.sh build genIdeaRuns, or open the project in IntelliJ IDEA.'

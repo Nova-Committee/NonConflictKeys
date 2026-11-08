@@ -1,4 +1,7 @@
-plugins { id 'dev.desiderium.retro.loom' }
+plugins {
+    id 'dev.desiderium.retro.loom'
+    id 'maven-publish'
+}
 group = providers.gradleProperty('mod_group').get()
 
 def modId = providers.gradleProperty('mod_id').get()
@@ -7,22 +10,21 @@ def mixinConfigName = "${modId}.mixins.json"
 def mixinRefmapName = "${modId}.mixins.refmap.json"
 base.archivesName = "${modId}-retrospectum-1.6.4"
 
-def prepareModSources = tasks.register('prepareModSources', Sync) {
-    def tokens = [MOD_ID: modId, MOD_NAME: modName, MOD_VERSION: project.version.toString()]
-        .collectEntries { key, value ->
-            def literal = groovy.json.JsonOutput.toJson(value)
-            [(key): literal.substring(1, literal.length() - 1)]
-        }
-    inputs.properties(tokens)
-    from('src/main/java') {
-        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: tokens)
+def generatedConstants = layout.buildDirectory.dir('generated/sources/modConstants/java')
+def generateModConstants = tasks.register('generateModConstants') {
+    def values = [MOD_ID: modId, MOD_NAME: modName, MOD_VERSION: project.version.toString()]
+    inputs.properties(values)
+    outputs.dir(generatedConstants)
+    doLast {
+        def output = generatedConstants.get().file('io/github/vulpesstella/nckeys/BuildConstants.java').asFile
+        output.parentFile.mkdirs()
+        def fields = values.collect { key, value ->
+            "    public static final String ${key} = ${groovy.json.JsonOutput.toJson(value)};"
+        }.join('\n')
+        output.setText("package io.github.vulpesstella.nckeys;\n\npublic final class BuildConstants {\n${fields}\n    private BuildConstants() {}\n}\n", 'UTF-8')
     }
-    filteringCharset = 'UTF-8'
-    into(layout.buildDirectory.dir('prepared-sources/main/java'))
 }
-tasks.named('compileJava', JavaCompile) {
-    setSource(files(prepareModSources).asFileTree)
-}
+sourceSets.main.java.srcDir(generateModConstants)
 
 tasks.named('processResources', ProcessResources) {
     def modInfo = [
@@ -44,19 +46,35 @@ tasks.named('processResources', ProcessResources) {
 }
 
 def mixinCheckout = providers.gradleProperty('retrospectumMixinCheckout').orNull
-def bootstrapJar = mixinCheckout
-    ? file("${mixinCheckout}/runtime/mixin-bootstrap/build/libs/retrospectum-mixin-0.1.0-SNAPSHOT.jar")
-    : file(providers.gradleProperty('mixin_bootstrap').getOrElse('libs/retrospectum-mixin-0.1.0-alpha.1.jar'))
+def mixinVersion = providers.gradleProperty('mixin_version').getOrElse('0.2.0')
+def localBootstrap = providers.gradleProperty('mixin_bootstrap').orNull
 
 repositories {
-    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven {
+        url = uri(providers.gradleProperty('retrospectumMavenUrl').getOrElse('https://maven.desiderium.dev/releases/'))
+        content { includeGroup 'dev.desiderium.retro' }
+    }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/'; content { includeGroup 'org.spongepowered' } }
 }
 dependencies {
     minecraft 'com.mojang:minecraft:1.6.4'
     forge 'net.minecraftforge:forge:1.6.4-9.11.1.1345:universal'
     mappings 'net.minecraftforge:forge:1.6.4-9.11.1.1345:src@zip'
-    mixinBootstrap files(bootstrapJar)
+    if (mixinCheckout) {
+        mixinBootstrap files("${mixinCheckout}/runtime/mixin-bootstrap/build/libs/retrospectum-mixin-${mixinVersion}.jar")
+    } else if (localBootstrap) {
+        mixinBootstrap files(localBootstrap)
+    } else {
+        mixinBootstrap "dev.desiderium.retro:retrospectum-mixin:${mixinVersion}"
+    }
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 }
 retrospectum.mixin('main', mixinRefmapName)
 retrospectum.mixinConfig(mixinConfigName)
+
+// Java variants expose the SRG release archive; dependency scopes follow Gradle conventions.
+publishing {
+    publications {
+        mod(MavenPublication) { from components.java }
+    }
+}

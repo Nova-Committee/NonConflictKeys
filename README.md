@@ -12,14 +12,14 @@ Pressing that key triggers every binding assigned to it: bind *Forward* and
 ## Installation
 
 1. Install Minecraft Forge 9.11.1.1345 for Minecraft 1.6.4.
-2. Install [Retrospectum Mixin](https://github.com/DesideriumMC/RetrospectumMixin).
+2. Install [Retrospectum Mixin](https://github.com/DesideriumMC/RetrospectumMixin) 0.2.0.
 3. Place `nckeys-retrospectum-1.6.4-<version>.jar` in `mods/`.
 
 ## Building
 
-JDK 17 runs Gradle, JDK 8 compiles and JDK 7 runs the game. The setup scripts
-locate or download the required JDKs and record the selection in
-`.jdks/homes.properties`.
+JDK 17 runs Gradle, JDK 8 compiles and JDK 7 or 8 runs the game. Setup locates
+or downloads the required JDKs and writes their paths to the ignored
+`gradle.local.properties`.
 
 ```powershell
 # Windows
@@ -46,9 +46,12 @@ The project uses [Retrospectum Loom](https://github.com/DesideriumMC/Retrospectu
 and [Retrospectum Mixin](https://github.com/DesideriumMC/RetrospectumMixin) from
 the [Retrospectum Mod Template](https://github.com/DesideriumMC/RetrospectumModTemplate).
 
-Mod metadata lives in `gradle.properties`. `MixinKeyBinding` handles input by
-updating every binding whose current `keyCode` matches the pressed key, in both
-`setKeyBindState` and `onTick`.
+Mod metadata lives in `gradle.properties` and is compiled into `BuildConstants`.
+`MixinKeyBinding` updates every binding whose current `keyCode` matches the
+pressed key in `setKeyBindState` and `onTick`.
+
+See [development](docs/DEVELOPMENT.md), [compatibility](docs/COMPATIBILITY.md)
+and [troubleshooting](docs/TROUBLESHOOTING.md) for toolchain details.
 
 ## License
 

@@ -1,7 +1,6 @@
 * text=auto eol=lf
 *.bat text eol=crlf
 *.jar binary
-runtime/mixin-bootstrap/src/upstream/java/** -text
 **/src/main/resources/** -text
 
 libs/** -text whitespace=cr-at-eol

@@ -1,0 +1,66 @@
+name: Build mod
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-mod-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Java 7 target API
+        uses: actions/setup-java@v6
+        id: java7
+        with:
+          distribution: zulu
+          java-version: '7'
+      - name: Install Java 8 compiler
+        uses: actions/setup-java@v6
+        id: java8
+        with:
+          distribution: temurin
+          java-version: '8'
+      - name: Install Java 17 build JVM
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Build mod
+        env:
+          JDK7: ${{ steps.java7.outputs.path }}
+          JDK8: ${{ steps.java8.outputs.path }}
+        run: >-
+          bash ./gradlew --no-daemon --console=plain
+          "-Pjava7Home=$JDK7"
+          "-Porg.gradle.java.installations.paths=$JDK7,$JDK8,$JAVA_HOME"
+          clean build
+      - name: Upload distributable mod
+        uses: actions/upload-artifact@v6
+        with:
+          name: mod-${{ github.sha }}
+          path: |
+            build/libs/*.jar
+            !build/libs/*-dev.jar
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload failure reports
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-reports-${{ github.sha }}
+          path: |
+            build/reports/
+            build/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
