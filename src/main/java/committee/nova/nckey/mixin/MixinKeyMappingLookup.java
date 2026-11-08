@@ -17,16 +17,20 @@ import java.util.Set;
 
 @Mixin(KeyMappingLookup.class)
 public class MixinKeyMappingLookup implements ILookup {
+    // 26.3: KeyMappingLookup.map is an instance field (was static pre-26.x).
     @Shadow(remap = false)
     @Final
-    private static EnumMap<KeyModifier, Map<InputConstants.Key, Collection<KeyMapping>>> map;
+    private EnumMap<KeyModifier, Map<InputConstants.Key, Collection<KeyMapping>>> map;
 
     @Override
     public Set<KeyMapping> nckey$lookupActives(InputConstants.Key key) {
-        final KeyModifier activeModifier = KeyModifier.getActiveModifier();
-        if (!activeModifier.matches(key)) {
-            final Set<KeyMapping> bindings = nckey$getBindings(key, activeModifier);
-            if (!bindings.isEmpty()) return bindings;
+        // 26.3: KeyModifier.getActiveModifier() was replaced by
+        // getActiveModifiers() (plural, returns all active modifiers).
+        for (KeyModifier activeModifier : KeyModifier.getActiveModifiers()) {
+            if (!activeModifier.matches(key)) {
+                final Set<KeyMapping> bindings = nckey$getBindings(key, activeModifier);
+                if (!bindings.isEmpty()) return bindings;
+            }
         }
         return nckey$getBindings(key, KeyModifier.NONE);
     }
