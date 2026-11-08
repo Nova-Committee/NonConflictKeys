@@ -18,7 +18,7 @@ dependencies {
     // To change the versions see the gradle.properties file
     // 26.x: Mojang (official) mappings — Yarn ends at 1.21.11.
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
+    // 26.x is unobfuscated: Loom rejects any mappings line here.
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 }
