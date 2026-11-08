@@ -13,12 +13,12 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '25'
       - uses: gradle/actions/setup-gradle@v3
       - name: Build
         run: ./gradlew build --stacktrace
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
-          name: NonConflictKeys-Fabric-1.20.1-${{ github.sha }}
+          name: NonConflictKeys-Fabric-26.3-${{ github.sha }}
           path: build/libs/*.jar
